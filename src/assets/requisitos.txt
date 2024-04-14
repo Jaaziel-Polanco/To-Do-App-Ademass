@@ -1,0 +1,135 @@
+Tema del Proyecto: Lista de Tareas Simple con Funcionalidades Básicas
+
+Fase 1
+Especificación Técnica
+1. Introducción:
+El objetivo de este proyecto es que los desarrolladores principiantes en React
+practiquen la creación de una aplicación básica de lista de tareas. Esta aplicación
+permitirá a los usuarios agregar, eliminar y marcar como completadas tareas
+simples.
+
+
+Requisitos Funcionales
+La lista de tareas deberá cumplir con los siguientes requisitos funcionales:
+-Permitir a los usuarios agregar nuevas tareas a la lista.
+-Mostrar todas las tareas en una lista visible.
+-Permitir a los usuarios marcar las tareas como completadas.
+-Proporcionar la capacidad de eliminar tareas de la lista.
+
+
+3. Tecnologías Requeridas:
+Para cumplir con los requisitos mencionados, se utilizarán las siguientes tecnologías:
+-ReactJS: Para la creación de la interfaz de usuario y la manipulación del estado de la
+aplicación.
+-HTML5/CSS3: Para el marcado y diseño básico de la aplicación.
+-JavaScript: Para la lógica de interacción del cliente y la manipulación del DOM.
+
+
+4. Metodología de Desarrollo
+Dado que el equipo es principiante en React, se recomienda adoptar una metodología
+de desarrollo incremental y centrada en la práctica constante. Se sugiere lo siguiente:
+-Comenzar con la configuración básica de un proyecto de React utilizando Create React
+App.
+-Implementar gradualmente cada funcionalidad requerida, comenzando con la adición de
+tareas, luego la visualización, marcado y eliminación de tareas.
+-Realizar pruebas a medida que se agregan nuevas funcionalidades para verificar su
+correcto funcionamiento.
+
+
+5. Entregables:
+Los entregables esperados para este proyecto serán:
+-Una aplicación web funcional que cumpla con los requisitos funcionales establecidos.
+-Código limpio y bien comentado que demuestre el uso adecuado de React y buenas prácticas de
+desarrollo.
+-Documentación básica que explique cómo ejecutar la aplicación localmente y una breve descripción de
+su funcionamiento.
+
+
+Especificaciones de Diseño
+1. Paleta de Colores:
+-Color Primario: #4CAF50 (verde)
+-Color Secundario: #FF5722 (naranja)
+-Color de Fondo: #FFFFFF (blanco)
+-Color de Texto Principal: #333333 (negro)
+-Color de Texto Secundario: #757575 (gris oscuro)
+
+
+Especificaciones de Diseño
+2. Interfaz de Usuario:
+La interfaz estará compuesta principalmente por una lista de tareas.
+Cada tarea estará representada por un elemento en la lista.
+Se utilizará una fuente legible y clara para el texto, como "Arial" o "Roboto".
+
+
+Especificaciones de Diseño
+3. Componentes:
+Formulario de Agregar Tarea:
+-Un campo de entrada de texto para ingresar la nueva tarea.
+-Un botón para agregar la tarea a la lista.
+Lista de Tareas:
+-Cada elemento de la lista mostrará el texto de la tarea.
+-Se incluirá un botón de "completar" para marcar la tarea como completada.
+-Se incluirá un botón de "eliminar" para eliminar la tarea de la lista.
+
+
+Especificaciones de Diseño
+ 4.Diseño Responsivo:
+-La aplicación será completamente receptiva y se adaptará a diferentes tamaños
+de pantalla, desde dispositivos móviles hasta escritorios.
+-En dispositivos móviles, la lista de tareas ocupará todo el ancho de la pantalla y
+los elementos de la lista serán lo suficientemente grandes como para tocar
+fácilmente con los dedos.
+
+
+Especificaciones de Diseño
+5. Estilos:
+Los elementos de la interfaz tendrán bordes suaves y sombras sutiles para dar
+una sensación de profundidad.
+Se utilizarán transiciones suaves para las animaciones, como el desvanecimiento
+al agregar o eliminar tareas.
+Se resaltarán las tareas completadas con un color de fondo diferente o un
+marcador visual.
+
+
+Especificaciones de Diseño
+6. Iconografía:
+Se utilizarán iconos simples y reconocibles para los botones de agregar,
+completar y eliminar tareas.
+Se pueden utilizar íconos de una biblioteca de iconos como Font Awesome o
+Material Icons.
+
+
+Especificaciones de Diseño
+7. Espaciado y Diseño de Contenido:
+Se utilizará un espaciado adecuado entre los elementos de la interfaz para una
+apariencia limpia y ordenada.
+La disposición de los elementos se diseñará de manera intuitiva para una fácil
+comprensión y uso por parte del usuario.
+
+
+Especificaciones de Diseño
+8. Accesibilidad:
+Se prestará atención a la accesibilidad para garantizar que la aplicación sea
+usable por usuarios con discapacidades visuales o motoras.
+Se utilizarán etiquetas semánticas adecuadas en el HTML para facilitar la
+navegación y la interacción con lectores de pantalla.
+
+
+Especificaciones de Diseño
+9. Consistencia Visual:
+Se mantendrá una consistencia visual en toda la aplicación, utilizando la misma
+paleta de colores, tipografía y estilo de diseño en todos los elementos.
+
+
+NOTA IMPORTANTE
+En el mundo laboral es IMPRESCINCIBLE el trabajo en equipo, apoyaros unos a los otros, hablaros y
+comunicaros.
+Por otro lado en el mundo tecnológico un valor fundamental es ser resolutivo, es decir, buscad
+información antes de preguntar, aprended a resolver problemas y en caso de duda realizar la opción que
+mejor se adapte al proyecto, pero realizar una de las opciones.
+Apuntamos las dudas que puedan surgir para en una última reunión resolverlas todas (A no ser que no se
+pueda avanzar, en ese caso, en primer lugar apoyarse en el equipo, si el equipo no es capaz de
+resolverlo, se lo mencionáis a Alex o Juanjo en el grupo de Discord).
+El taller de prácticas es para practicar, equivocarse y aprender. Así que esperamos que disfrutéis de él,
+conozcáis amistades nuevas y sobre todo que os ayude a crecer como desarrolladores.
+Un abrazo y …¡A PROGRAMAR!
