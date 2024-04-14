@@ -7,9 +7,18 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        gradient2 : 'linear-gradient(to left, #4CAF50, #FF5722)',
+      },
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif'],
-      }
+      },
+      colors: {
+        primary: '#4CAF50',
+        secondary:'#FF5722',
+        textPrimary: '#333333',
+        textSecondary: '#757575',
+        },
     },
   },
   plugins: [
