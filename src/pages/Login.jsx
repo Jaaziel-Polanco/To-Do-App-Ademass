@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link, } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { Link, useNavigate, } from 'react-router-dom';
 import { Checkbox, Form, Grid, Input, theme } from "antd";
 import userImg from '../assets/user.png'
 import { useUserContext } from '../context/UserContext';
@@ -9,9 +9,21 @@ const { useToken } = theme;
 const { useBreakpoint } = Grid;
 
 const Login = () => {
-    const { onFinish } = useUserContext();
+    const { onFinish, user } = useUserContext();
+    const navigate = useNavigate();
     const { token } = useToken();
     const screens = useBreakpoint();
+
+    const handleSubmit = (values) => {
+        onFinish(values, navigate); // Pasando navigate a onFinish
+    };
+
+    useEffect(() => {
+        if (user) {
+            console.log("Redireccionando al dashboard porque user está autenticado");
+            navigate('/dashboard', { replace: true });  // Utiliza 'replace' para evitar que el usuario vuelva a login con el botón atrás
+        }
+    }, [user, navigate]);
 
     const styles = {
         container: {
@@ -56,7 +68,7 @@ const Login = () => {
                     initialValues={{
                         remember: false,
                     }}
-                    onFinish={onFinish}
+                    onFinish={handleSubmit}
                     layout="vertical"
                     requiredMark="optional">
 

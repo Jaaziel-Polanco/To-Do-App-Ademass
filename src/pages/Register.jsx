@@ -119,7 +119,7 @@ const Register = () => {
                     <div className="text-white text-center w-full mb-5">
                         Ya tienes una cuenta?{" "}
                         <p className="animate-bounce animate-infinite animate-ease-in-out">
-                            <Link to={"/"} className="text-accent-100 font-extrabold hover:text-[#D1C4E9]">
+                            <Link to={"/login"} className="text-accent-100 font-extrabold hover:text-[#D1C4E9]">
                                 Iniciar sesión
                             </Link> </p>
                     </div>

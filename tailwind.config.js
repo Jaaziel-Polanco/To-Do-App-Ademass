@@ -10,6 +10,11 @@ export default {
       backgroundImage: {
         gradient2 : 'linear-gradient(to left, #4CAF50, #FF5722)',
       },
+      textShadow: {
+        default: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+        md: '3px 3px 5px rgba(0, 0, 0, 0.5)',
+        xl: '5px 5px 10px rgba(0, 0, 0, 0.5)',
+      },
       fontFamily: {
         'roboto': ['Roboto', 'sans-serif'],
       },
@@ -24,6 +29,7 @@ export default {
   plugins: [
     require('tailwindcss-animated'),
     addDynamicIconSelectors(),
+    require('tailwindcss-textshadow'),
   ],
 }
 

@@ -26,7 +26,7 @@ const Reset = () => {
                             Recuperar contraseña
                         </Button>
                     </Form.Item>
-                    <Link to={'/'} className='text-center'>
+                    <Link to={'/login'} className='text-center'>
                         <p>← Volver</p>
                     </Link>
                 </Form>
