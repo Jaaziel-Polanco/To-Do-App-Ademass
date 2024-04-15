@@ -7,3 +7,12 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.select.ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.select.ant-select-focused .ant-select-selector,
+.select.ant-select-open .ant-select-selector {
+    border-color: black !important; /* Color personalizado para hover y focus */
+}
+.select .ant-select-selection-placeholder {
+    color: #333333 !important; /* Cambia 'black' por cualquier color que necesites */
+}
