@@ -10,14 +10,17 @@ const UserContext = createContext()
 export default function UserContextProvider({ children }) {
 
     const [registrando, setRegistrando] = useState(false)
+    const [user, setUser] = useState(null);
+
 
     // maneja el registro de usuarios
-    const onFinish = async (values) => {
+    const onFinish = async (values, navigate) => {
         console.log("Received values of form: ", values);
 
         if (!registrando) {
             try {
                 await signInWithEmailAndPassword(auth, values.email, values.password)
+                navigate('/dashboard');
             }
             catch (error) {
                 notification.error({
@@ -56,7 +59,7 @@ export default function UserContextProvider({ children }) {
 
 
     return (
-        <UserContext.Provider value={{ onFinish, onFinishP, loading, form }}>
+        <UserContext.Provider value={{ onFinish, onFinishP, loading, form, user, setUser }}>
             {children}
         </UserContext.Provider>
     )
