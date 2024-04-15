@@ -23,6 +23,13 @@ export default {
         secondary:'#FF5722',
         textPrimary: '#333333',
         textSecondary: '#757575',
+        danger: '#DC3545',
+        },
+        borderWidth: {
+          '3': '3px', // Ejemplo si quieres un borde más grueso
+        },
+        spacing: {
+          '7': '1.75rem', // Ejemplo si necesitas más espaciado
         },
     },
   },
