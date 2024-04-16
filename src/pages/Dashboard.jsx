@@ -31,7 +31,7 @@ const Dashboard = () => {
         <div>
             <div className='bg-[#8e8a8a]'>
                 <button className='absolute right-0 mt-5 mr-14 flex justify-center items-center z-50 text-lg uppercase '>
-                    <span class="icon-[ph--user-circle-thin] w-16 h-16"></span>
+                    <span className="icon-[ph--user-circle-thin] w-16 h-16"></span>
                     {user.displayName}
                 </button>
 

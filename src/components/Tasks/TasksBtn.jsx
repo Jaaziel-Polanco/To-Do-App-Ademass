@@ -1,26 +1,37 @@
-import React from 'react'
+import React from 'react';
 
-const TasksBtn = () => {
+const TasksBtn = ({ title, date, completed, onDelete, onEdit, onToggleComplete, onShowInfo }) => {
     return (
-        <button className="flex justify-between items-center gap-2 w-full py-[6px] pl-7 pr-9 rounded-lg border-2 border-black shadow-xl mt-3 ">
-            Nombre de la Tarea
+        <div className='flex justify-between items-center gap-2 w-full py-[6px] pl-7 pr-6 rounded-lg border-2 border-black shadow-xl mt-3'>
+            <div className='flex-grow cursor-pointer' onClick={onShowInfo}>
+                {title}
+            </div>
             <div className='flex gap-[25px] items-center text-textSecondary '>
-                <span>10/01/2024</span>
-                <button className='rounded-lg px-1 text-white bg-primary'>Completada</button>
+                <span>{date}</span>
 
-                <div className='flex items-center gap-3'>
-                    <button className='flex justify-center rounded-full p-1 text-white bg-danger'>
-                        <span class="icon-[mono-icons--delete] w-6 h-6"></span>
+                <button onClick={onToggleComplete} className={`rounded-lg px-1 text-white ${completed ? 'bg-primary' : 'bg-danger'}`}>
+                    {completed ? 'Completada' : 'No completada'}
+                </button>
+
+                <div className='flex justify-between items-center gap-3'>
+                    <button className='flex justify-center items-center rounded-full p-1 text-white bg-danger' onClick={(e) => {
+                        e.stopPropagation(); // Prevenir que el evento del clic se propague al div principal
+                        onDelete();
+                    }}>
+                        <span className="icon-[mono-icons--delete] w-6 h-6"></span>
                     </button>
 
-                    <button className='flex justify-center' >
-                        <span class="icon-[simple-line-icons--options-vertical] bg-textPrimary h-6 w-6"></span>
+                    <button className='flex justify-center' onClick={(e) => {
+                        e.stopPropagation(); // Prevenir que el evento del clic se propague al div principal
+                        onEdit();
+                    }}>
+                        <span className="icon-[simple-line-icons--options-vertical] bg-textPrimary w-6 h-6"></span>
                     </button>
                 </div>
 
             </div>
-        </button>
+        </div>
     )
 }
 
-export default TasksBtn
+export default TasksBtn;

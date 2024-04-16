@@ -1,14 +1,15 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import { TaskProvider } from '../context/TaskContext'
 
 const GeneralLayout = () => {
     return (
-        <div>
+        <TaskProvider>
             <Outlet />
             {
                 // aca puede ir un footer general
             }
-        </div>
+        </TaskProvider>
     )
 }
 

@@ -1,4 +1,6 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
 
 // Your web app's Firebase configuration
 console.log(import.meta.env.VITE_FIREBASE_API_KEY);
@@ -14,4 +16,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const appFirebase = initializeApp(firebaseConfig);
+
+// inicializa firestore
+const db = getFirestore(appFirebase);
+export { db };
+
 export default appFirebase;
