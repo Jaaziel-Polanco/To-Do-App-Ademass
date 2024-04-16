@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { RouterProvider, createHashRouter } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
@@ -13,7 +13,7 @@ import UserContextProvider from './context/UserContext.jsx'
 import GeneralLayout from './layout/GeneralLayout.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <GeneralLayout />, // Layout general que podría incluir la navbar, footer, etc.
