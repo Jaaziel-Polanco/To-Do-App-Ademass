@@ -16,6 +16,7 @@ const AddTaskModal = ({ isOpen, onClose, addTask }) => {
         const formattedValues = {
             ...values,
             date: values.date.format('DD/MM/YYYY'),
+            description: values.description || '',
             completed: false,
         };
 
