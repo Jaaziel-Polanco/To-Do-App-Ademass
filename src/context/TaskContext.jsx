@@ -84,7 +84,7 @@ export function TaskProvider({ children }) {
     }
     setLoading(false);
   },
-    []);
+    [user, db]);
 
   const value = {
     tasks,
