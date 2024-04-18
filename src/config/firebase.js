@@ -2,8 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 
-// Your web app's Firebase configuration
-console.log(import.meta.env.VITE_FIREBASE_API_KEY);
 // aca van las variables de entorno que se crearon en el archivo .env para proteger las credenciales de firebase
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,

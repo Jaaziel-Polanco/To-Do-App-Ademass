@@ -1,17 +1,24 @@
 import { db } from '../config/firebase';
-import { collection, addDoc, doc, onSnapshot, query, where, updateDoc, deleteDoc, writeBatch } from 'firebase/firestore';
+import { collection, doc, onSnapshot, query, where, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import PropTypes from 'prop-types';
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { useUserContext } from '../context/UserContext';
 
 export const TaskContext = createContext();
 
-export const useTask = () => useContext(TaskContext);
+export const useTask = () => {
+  const context = useContext(TaskContext);
+  if (!context) {
+    console.error('TaskContext no se encuentra dentro del ámbito de un Provider');
+    return {};
+  }
+  return context;
+};
 
 export function TaskProvider({ children }) {
   const { user } = useUserContext();
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Inicializado como true para el loading inicial
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -20,13 +27,15 @@ export function TaskProvider({ children }) {
       return;
     }
 
+    // Se suscribe a cambios en la colección de tareas del usuario actual
     const unsubscribe = onSnapshot(
       query(collection(db, 'tasks'), where('uid', '==', user.uid)),
       (snapshot) => {
-        const fetchedTasks = snapshot.docs
-          .map(doc => ({ id: doc.id, ...doc.data() }))
-          .sort((a, b) => a.order - b.order);  // Asegura el orden correcto
-        setTasks(fetchedTasks);
+        const updatedTasks = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setTasks(updatedTasks);
         setLoading(false);
       },
       (err) => {
@@ -36,26 +45,27 @@ export function TaskProvider({ children }) {
       }
     );
 
+    // Limpiar la suscripción cuando el componente se desmonte o el usuario cambie
     return () => unsubscribe();
   }, [user]);
 
-  const addTask = useCallback(async (taskData) => {
+  // Función para añadir una nueva tarea
+  const addTask = async (taskData) => {
     if (!user) return;
-    setLoading(true);
+
+    const completeTaskData = { ...taskData, uid: user.uid, completed: false };
     try {
-      const newOrder = tasks.length;  // Asume que la nueva tarea va al final de la lista
-      const completeTaskData = { ...taskData, uid: user.uid, order: newOrder, completed: false };
       await addDoc(collection(db, 'tasks'), completeTaskData);
-      setLoading(false);
     } catch (err) {
       console.error('Error al agregar la tarea:', err);
       setError(err);
-      setLoading(false);
     }
-  }, [user, tasks]);
+  };
 
-  const updateTask = useCallback(async (taskId, updatedData) => {
+  // Función para actualizar una tarea existente
+  const updateTask = async (taskId, updatedData) => {
     if (!user) return;
+
     try {
       const taskRef = doc(db, 'tasks', taskId);
       await updateDoc(taskRef, updatedData);
@@ -63,40 +73,19 @@ export function TaskProvider({ children }) {
       console.error('Error al actualizar la tarea:', err);
       setError(err);
     }
-  }, [user]);
+  };
 
-  const deleteTask = useCallback(async (taskId) => {
+  // Función para eliminar una tarea
+  const deleteTask = async (taskId) => {
     if (!user) return;
+
     try {
       await deleteDoc(doc(db, 'tasks', taskId));
     } catch (err) {
       console.error('Error al eliminar la tarea:', err);
       setError(err);
     }
-  }, [user]);
-
-  const updateTaskOrder = useCallback(async (sourceIndex, destinationIndex) => {
-    if (!user) return;
-    setLoading(true);
-    const batch = writeBatch(db);
-    const newTasks = Array.from(tasks);
-    const [removed] = newTasks.splice(sourceIndex, 1);
-    newTasks.splice(destinationIndex, 0, removed);
-
-    newTasks.forEach((task, index) => {
-      batch.update(doc(db, 'tasks', task.id), { order: index });
-    });
-
-    try {
-      await batch.commit();
-      setTasks(newTasks); // Actualizar el estado local con el nuevo orden
-      setLoading(false);
-    } catch (err) {
-      console.error('Error al actualizar el orden de las tareas:', err);
-      setError(err);
-      setLoading(false);
-    }
-  }, [user, tasks]);
+  };
 
   const value = {
     tasks,
@@ -105,7 +94,6 @@ export function TaskProvider({ children }) {
     addTask,
     updateTask,
     deleteTask,
-    updateTaskOrder,
   };
 
   return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
