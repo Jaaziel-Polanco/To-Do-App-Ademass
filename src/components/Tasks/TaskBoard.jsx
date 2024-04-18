@@ -1,5 +1,5 @@
 import { Select } from 'antd'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import NoTasks from './NoTasks'
 import TasksBtn from './TasksBtn'
 import AddTaskModal from './AddTaskModal'
@@ -11,11 +11,11 @@ import EditTaskModal from './EditTaskModal'
 const TaskBoard = () => {
     const { tasks, loading, deleteTask, addTask, updateTask } = useTask();
 
-
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isTaskInfoModalOpen, setIsTaskInfoModalOpen] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
+    const [filter, setFilter] = useState('all');
 
     const closeModal = () => setIsModalOpen(false);
 
@@ -37,11 +37,33 @@ const TaskBoard = () => {
         updateTask(taskId, { completed: !currentStatus });
     };
 
+    const filteredTasks = useMemo(() => {
+        switch (filter) {
+            case 'completed':
+                return tasks.filter(task => task.completed);
+            case 'pending':
+                return tasks.filter(task => !task.completed);
+            case 'all':
+            default:
+                return tasks;
+        }
+    }, [tasks, filter]);
+
+    // Función para manejar el cambio en el Select
+    const handleFilterChange = (value) => {
+        setFilter(value);
+    };
+
+
     return (
         <div className='mx-72'>
             <div className='flex justify-between px-24 text-4xl font-medium text-textPrimary pt-5'>
                 <h1 className='text-shadow-lg font-bold'>Task Board</h1>
-                <Select placeholder="Filtrar" className='select w-52 h-9'>
+                <Select
+                    placeholder="Filtrar"
+                    className='select w-52 h-9'
+                    onChange={handleFilterChange}
+                >
                     <Select.Option value="all">Mostrar todo</Select.Option>
                     <Select.Option value="completed">Completadas</Select.Option>
                     <Select.Option value="pending">Pendientes</Select.Option>
@@ -64,8 +86,9 @@ const TaskBoard = () => {
                     Añadir Tarea
                 </button>
 
-                {loading ? (<LoadingTask />)
-                    : tasks.length > 0 ? tasks.map(task => (
+                {loading ? (<LoadingTask />
+                ) : filteredTasks.length > 0 ? (
+                    filteredTasks.map(task => (
                         <TasksBtn
                             key={task.id}
                             title={task.title}
@@ -75,7 +98,7 @@ const TaskBoard = () => {
                             onEdit={() => handleEdit(task)}
                             onToggleComplete={() => handleToggleComplete(task.id, task.completed)}
                             onShowInfo={() => handleShowInfo(task)}
-                        />
+                        />)
                     )) : <NoTasks />}
 
                 <AddTaskModal
