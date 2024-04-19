@@ -9,6 +9,8 @@ export default {
     extend: {
       backgroundImage: {
         gradient2 : 'linear-gradient(to left, #4CAF50, #FF5722)',
+        gradientBtn : 'linear-gradient(to right, #FF5722, #4CAF50)',
+        gradientBtn2 : 'linear-gradient(to right, #4CAF50, #FFA751)',
       },
       textShadow: {
         default: '1px 1px 2px rgba(0, 0, 0, 0.5)',

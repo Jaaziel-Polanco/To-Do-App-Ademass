@@ -6,9 +6,6 @@ const GeneralLayout = () => {
     return (
         <TaskProvider>
             <Outlet />
-            {
-                // aca puede ir un footer general
-            }
         </TaskProvider>
     )
 }

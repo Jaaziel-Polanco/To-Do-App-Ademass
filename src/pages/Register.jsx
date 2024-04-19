@@ -29,7 +29,7 @@ const Register = () => {
         } catch (error) {
             notification.error({
                 message: 'Error en el registro',
-                description: error.message,
+                description: "Ya existe una cuenta con este correo electrónico. Por favor, intenta con otro.",
             });
         }
     };
@@ -82,8 +82,8 @@ const Register = () => {
                             message: "Por favor introduce tu contraseña!",
                         },
                         {
-                            min: 6,
-                            message: "La contraseña debe tener al menos 6 caracteres",
+                            min: 8,
+                            message: "La contraseña debe tener al menos 8 caracteres",
                         },
                     ]}
                 >

@@ -3,6 +3,7 @@ import { collection, doc, onSnapshot, query, where, addDoc, updateDoc, deleteDoc
 import PropTypes from 'prop-types';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useUserContext } from '../context/UserContext';
+import { notification } from 'antd';
 
 export const TaskContext = createContext();
 
@@ -39,7 +40,9 @@ export function TaskProvider({ children }) {
         setLoading(false);
       },
       (err) => {
-        console.error('Error al obtener las tareas:', err);
+        notification.error({
+          message: 'Error al obtener las tareas',
+        });
         setError(err);
         setLoading(false);
       }
@@ -57,7 +60,10 @@ export function TaskProvider({ children }) {
     try {
       await addDoc(collection(db, 'tasks'), completeTaskData);
     } catch (err) {
-      console.error('Error al agregar la tarea:', err);
+      notification.error({
+        message: 'Error al añadir la tarea',
+        description: "Por favor verifica tus datos",
+      });
       setError(err);
     }
   };
@@ -70,7 +76,10 @@ export function TaskProvider({ children }) {
       const taskRef = doc(db, 'tasks', taskId);
       await updateDoc(taskRef, updatedData);
     } catch (err) {
-      console.error('Error al actualizar la tarea:', err);
+      notification.error({
+        message: 'Error al actualizar la tarea',
+        description: "Por favor verifica tus datos",
+      });
       setError(err);
     }
   };
@@ -82,7 +91,10 @@ export function TaskProvider({ children }) {
     try {
       await deleteDoc(doc(db, 'tasks', taskId));
     } catch (err) {
-      console.error('Error al eliminar la tarea:', err);
+      notification.error({
+        message: 'Error al eliminar la tarea',
+        description: "Por favor verifica tus datos",
+      });
       setError(err);
     }
   };

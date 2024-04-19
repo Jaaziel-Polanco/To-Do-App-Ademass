@@ -15,7 +15,7 @@ const Login = () => {
     const screens = useBreakpoint();
 
     const handleSubmit = (values) => {
-        onFinish(values, navigate); // Pasando navigate a onFinish
+        onFinish(values, navigate);
     };
 
     useEffect(() => {
@@ -107,9 +107,6 @@ const Login = () => {
                     </Form.Item>
 
                     <Form.Item>
-                        <Form.Item name="remember" valuePropName="checked" noStyle>
-                            <Checkbox>Recuérdame</Checkbox>
-                        </Form.Item>
                         <Link to={'/Reset'} className="float-right">
                             Olvidaste tu contraseña?
                         </Link>
