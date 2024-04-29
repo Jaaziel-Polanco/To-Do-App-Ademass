@@ -16,32 +16,32 @@ import Dashboard from './pages/Dashboard.jsx'
 const router = createHashRouter([
   {
     path: "/",
-    element: <GeneralLayout />, // Layout general que podría incluir la navbar, footer, etc.
-    errorElement: <Error />, // Página de error general
+    element: <GeneralLayout />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
-        element: <Home />, // Página de inicio pública
+        element: <Home />,
       },
       {
         path: "login",
-        element: <Login />, // Página de inicio de sesión
+        element: <Login />,
       },
       {
         path: "register",
-        element: <Register />, // Página de registro
+        element: <Register />,
       },
       {
         path: "reset",
-        element: <Reset />, // Página de registro
+        element: <Reset />,
       },
       {
-        path: "dashboard", // Ruta base para todas las rutas autenticadas
-        element: <LayoutPrivate />, // Layout privado para usuarios autenticados
+        path: "dashboard",
+        element: <LayoutPrivate />,
         children: [
           {
             index: true,
-            element: <Dashboard />, // Página por defecto para el layout privado
+            element: <Dashboard />,
           },
           // otras sub-rutas dentro del layout privado...
         ]

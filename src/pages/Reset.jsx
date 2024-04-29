@@ -5,7 +5,7 @@ import { useUserContext } from '../context/UserContext';
 
 
 const Reset = () => {
-    const { onFinishP, loading, form } = useUserContext();
+    const { resetPassword, loading, form } = useUserContext();
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-bgTertiary">
@@ -13,7 +13,7 @@ const Reset = () => {
                 <Form
                     form={form}
                     name="recover_form"
-                    onFinish={onFinishP}
+                    onFinish={resetPassword}
                 >
                     <Form.Item
                         name="email"
@@ -26,7 +26,7 @@ const Reset = () => {
                             Recuperar contraseña
                         </Button>
                     </Form.Item>
-                    <Link to={'/login'} className='text-center'>
+                    <Link to={'/login'} className='text-center hover:text-primary'>
                         <p>← Volver</p>
                     </Link>
                 </Form>

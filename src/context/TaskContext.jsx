@@ -24,7 +24,7 @@ export function TaskProvider({ children }) {
 
   useEffect(() => {
     if (!user) {
-      setLoading(false);
+      setLoading(true);
       return;
     }
 

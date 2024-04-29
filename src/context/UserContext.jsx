@@ -1,4 +1,4 @@
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { createContext, useContext, useState } from "react";
 import appFirebase from "../config/firebase";
 import { notification, Form } from "antd";
@@ -9,15 +9,15 @@ const UserContext = createContext()
 
 export default function UserContextProvider({ children }) {
 
-    const [registrando, setRegistrando] = useState(false)
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
 
 
-    // maneja el registro de usuarios
-    const onFinish = async (values, navigate) => {
+    // maneja el acceso de usuarios
+    const userAccess = async (values, navigate) => {
         console.log("Received values of form: ", values);
-
-        if (!registrando) {
+        setLoading(true);
+        if (!loading) {
             try {
                 await signInWithEmailAndPassword(auth, values.email, values.password)
                 navigate('/dashboard');
@@ -27,16 +27,42 @@ export default function UserContextProvider({ children }) {
                     message: 'Usuario o Contraseña incorrectos',
                     description: "Por favor verifica tus datos",
                 });
+            } finally {
+                setLoading(false);
             }
             await signInWithEmailAndPassword(auth, values.email, values.password)
         }
     };
 
-    // maneja la recuperación de contraseña
-    const [loading, setLoading] = useState(false);
-    const [form] = Form.useForm();
+    // maneja el registro de usuarios
+    const userRegister = async (values, navigate) => {
+        setLoading(true);
+        try {
+            const { email, password, nombre, apellido } = values;
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            await updateProfile(userCredential.user, {
+                displayName: `${nombre} ${apellido}`,
+            });
 
-    const onFinishP = (values) => {
+            notification.success({
+                message: 'Registro exitoso',
+                description: 'La cuenta ha sido creada con éxito. Ya puedes iniciar sesión.',
+            });
+
+            navigate('/');
+        } catch (error) {
+            notification.error({
+                message: 'Error en el registro',
+                description: "Ya existe una cuenta con este correo electrónico. Por favor, intenta con otro.",
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // maneja la recuperación de contraseña
+    const [form] = Form.useForm();
+    const resetPassword = (values) => {
         setLoading(true);
         sendPasswordResetEmail(auth, values.email)
             .then(() => {
@@ -59,7 +85,7 @@ export default function UserContextProvider({ children }) {
 
 
     return (
-        <UserContext.Provider value={{ onFinish, onFinishP, loading, form, user, setUser }}>
+        <UserContext.Provider value={{ userAccess, userRegister, resetPassword, loading, form, user, setUser }}>
             {children}
         </UserContext.Provider>
     )

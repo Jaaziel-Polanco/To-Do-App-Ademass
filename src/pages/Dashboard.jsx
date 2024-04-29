@@ -1,59 +1,43 @@
 import React, { useState } from 'react'
-import appFirebase from '../config/firebase';
-import { getAuth, signOut } from 'firebase/auth';
-import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { Spin } from 'antd';
 import logo from "../assets/Logo-APP-Tareas.png";
 import { useUserContext } from '../context/UserContext';
 import TaskBoard from '../components/Tasks/TaskBoard';
+import UserProfile from '../components/User/UserProfile';
 
-const auth = getAuth(appFirebase);
 
 const Dashboard = () => {
     const { user } = useUserContext();
-    const [isSigningOut, setIsSigningOut] = useState(false);
+    const [open, setOpen] = useState(false);
 
-    const navigate = useNavigate();
-    const handleSignOut = () => {
-        setIsSigningOut(true);
-        signOut(auth)
-            .then(() => {
-                navigate('/');
-            })
-            .catch((error) => {
-                console.error('Error al cerrar la sesión', error);
-                setIsSigningOut(false);
-            });
+    const showDrawer = () => {
+        setOpen(true);
     };
+    const onClose = () => {
+        setOpen(false);
+    };
+
 
     return (
         <div>
             <div className='bg-[#8e8a8a]'>
-                <button className='absolute right-0 mt-5 mr-14 flex justify-center items-center z-50 text-lg uppercase '>
-                    <span className="icon-[ph--user-circle-thin] w-16 h-16"></span>
+                <button onClick={showDrawer} className='absolute right-0 mt-5 mr-5 lg:mr-14 flex justify-center items-center z-50 text-[10px] lg:text-lg uppercase '>
+                    <span className="icon-[ph--user-circle-thin] w-8 h-8 lg:w-16 lg:h-16"></span>
                     {user.displayName}
                 </button>
+                {open && (
+                    <UserProfile onClose={onClose} open={open} />
+                )}
 
-                <div className='flex justify-center items-center text-5xl text-shadow-md font-roboto font-extrabold text-primary py-11'>
-                    <img src={logo} alt="logo" className='w-28 h-28' />
-                    <h1 className='ml-[-18px]'>To<span className='text-secondary'>Do</span></h1>
+                <div className='flex justify-center items-center text-5xl text-shadow-md font-roboto font-extrabold text-primary pt-14 pb-7 lg:py-11'>
+                    <img src={logo} alt="logo" className='w-36 h-36 lg:w-28 lg:h-28' />
+                    <h1 className='ml-[-30px]  lg:ml-[-18px]'>To<span className='text-secondary'>Do</span></h1>
                 </div>
             </div>
 
             <TaskBoard />
 
-            {/*este boton de cerrar sesion es temporal hay que moverlo*/}
-            <Button
-                onClick={handleSignOut}
-                disabled={isSigningOut}
-                className="text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50">
-                {isSigningOut ? <Spin /> : "Cerrar sesión"}
-            </Button>
         </div>
     )
 }
 
 export default Dashboard
-
-{/**/ }

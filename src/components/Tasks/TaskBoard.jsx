@@ -54,14 +54,16 @@ const TaskBoard = () => {
         setFilter(value);
     };
 
+    console.log(loading)
+
 
     return (
-        <div className='mx-72'>
-            <div className='flex justify-between px-24 text-4xl font-medium text-textPrimary pt-5'>
+        <div className='lg:mx-72'>
+            <div className='flex justify-between px-5 lg:px-24 text-2xl lg:text-4xl font-medium text-textPrimary pt-6 lg:pt-8'>
                 <h1 className='text-shadow-lg font-bold'>Task Board</h1>
                 <Select
                     placeholder="Filtrar"
-                    className='select w-52 h-9'
+                    className='select w-32 lg:w-52 h-9'
                     onChange={handleFilterChange}
                 >
                     <Select.Option value="all">Mostrar todo</Select.Option>
@@ -70,18 +72,18 @@ const TaskBoard = () => {
                 </Select>
             </div>
 
-            <div className='flex justify-between px-10 py-8 font-semibold text-textPrimary'>
-                <div>Tareas <span className='bg-slate-700 text-white rounded-xl px-2'>{tasks.length}</span></div>
-                <div className='flex gap-[85px] mr-32  '>
+            <div className='flex justify-between px-7 lg:px-10 py-8 font-semibold text-textPrimary'>
+                <div className='text-sm lg:text-base'>Tareas <span className='bg-slate-700 text-white rounded-xl px-2'>{tasks.length}</span></div>
+                <div className='flex gap-9 lg:gap-[85px] mr-9  lg:mr-32 text-xs lg:text-base'>
                     <p>Fecha</p>
                     <p className='text-secondary'>Status</p>
                 </div>
             </div>
 
-            <div className='px-7'>
+            <div className='px-1 lg:px-7'>
                 <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex items-center gap-2 w-full py-2 px-3 font-semibold rounded-lg border-2 border-dashed ">
+                    className="flex items-center gap-2 w-full py-3 px-3 font-semibold rounded-lg border-2 border-dashed ">
                     <span className="icon-[bi--plus-lg]"></span>
                     Añadir Tarea
                 </button>

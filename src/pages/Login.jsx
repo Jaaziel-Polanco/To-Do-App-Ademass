@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, useNavigate, } from 'react-router-dom';
-import { Checkbox, Form, Grid, Input, theme } from "antd";
+import { Button, Form, Grid, Input, theme } from "antd";
 import userImg from '../assets/user.png'
 import { useUserContext } from '../context/UserContext';
 
@@ -9,13 +9,13 @@ const { useToken } = theme;
 const { useBreakpoint } = Grid;
 
 const Login = () => {
-    const { onFinish, user } = useUserContext();
+    const { userAccess, user, loading } = useUserContext();
     const navigate = useNavigate();
     const { token } = useToken();
     const screens = useBreakpoint();
 
     const handleSubmit = (values) => {
-        onFinish(values, navigate);
+        userAccess(values, navigate);
     };
 
     useEffect(() => {
@@ -42,7 +42,7 @@ const Login = () => {
             alignItems: "center",
             background: "linear-gradient(to right,  #4CAF50, #FF5722)",
             display: "flex",
-            height: screens.sm ? "100vh" : "auto",
+            height: screens.sm ? "100vh" : "100vh",
             padding: screens.md ? `${token.sizeXXL}px 0px` : "0px"
         },
         title: {
@@ -84,7 +84,6 @@ const Login = () => {
                     >
                         <Input
                             id='email'
-                            className="focus:border-none hover:border-none"
                             placeholder="Email"
                         />
                     </Form.Item>
@@ -100,22 +99,22 @@ const Login = () => {
                     >
                         <Input.Password
                             id='password'
-                            className="focus:border-none hover:border-none"
                             type="password"
                             placeholder="Contraseña"
+                            className='password'
                         />
                     </Form.Item>
 
                     <Form.Item>
-                        <Link to={'/Reset'} className="float-right">
+                        <Link to={'/Reset'} className="float-right hover:text-primary">
                             Olvidaste tu contraseña?
                         </Link>
                     </Form.Item>
 
                     <Form.Item style={{ marginBottom: "0px" }}>
-                        <button block="true" type='submit' className="bg-primary text-primary-100 hover:bg-[#bb8f2f] transition-all font-extrabold w-full rounded-xl py-1">
+                        <Button block="true" type='text' htmlType='submit' loading={loading} className="btn text-primary-100 font-extrabold w-full rounded-xl py-1">
                             Acceder
-                        </button>
+                        </Button>
                         <div>
                             <div className="text-white text-center w-full mt-5">
                                 Aún no tienes tu cuenta?{" "}

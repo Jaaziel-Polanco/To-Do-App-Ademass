@@ -1,45 +1,27 @@
 import React from 'react'
-import { Form, Input, notification } from "antd";
+import { Button, Form, Input } from "antd";
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import appFirebase from '../config/firebase';
 import imgOut from '../assets/userLogOut.png';
+import { useUserContext } from '../context/UserContext';
 
-const auth = getAuth(appFirebase);
+
 
 
 const Register = () => {
+    const { userRegister, loading } = useUserContext();
     const [form] = Form.useForm();
     const navigate = useNavigate();
 
-    const onFinish = async (values) => {
-        try {
-            const { email, password, nombre, apellido } = values;
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            await updateProfile(userCredential.user, {
-                displayName: `${nombre} ${apellido}`,
-            });
-
-            notification.success({
-                message: 'Registro exitoso',
-                description: 'La cuenta ha sido creada con éxito. Ya puedes iniciar sesión.',
-            });
-
-            navigate('/');
-        } catch (error) {
-            notification.error({
-                message: 'Error en el registro',
-                description: "Ya existe una cuenta con este correo electrónico. Por favor, intenta con otro.",
-            });
-        }
-    };
+    const handleSubmit = (values) => {
+        userRegister(values, navigate);
+    }
 
     return (
         <div className='flex items-center justify-center h-screen bg-gradient2'>
             <Form
                 form={form}
                 name="registro"
-                onFinish={onFinish}
+                onFinish={handleSubmit}
                 className="w-96 rounded-2xl bg-transparent shadow-2xl p-8 flex flex-col gap-3 animate-fade-right animate-once animate-ease-in"
                 layout="vertical"
             >
@@ -111,15 +93,15 @@ const Register = () => {
                 </Form.Item>
 
                 <Form.Item>
-                    <button block="true" type='submit' className="bg-accent-100 text-primary-100 hover:bg-[#D1C4E9] transition-all font-extrabold w-full rounded-xl py-1">
+                    <Button block='true' type='text' htmlType='submit' loading={loading} className="btn font-extrabold w-full rounded-xl py-1">
                         Registrarse
-                    </button>
+                    </Button>
                 </Form.Item>
                 <Form.Item>
                     <div className="text-white text-center w-full mb-5">
                         Ya tienes una cuenta?{" "}
                         <p className="animate-bounce animate-infinite animate-ease-in-out">
-                            <Link to={"/login"} className="text-accent-100 font-extrabold hover:text-[#D1C4E9]">
+                            <Link to={"/login"} className="text-accent-100 font-extrabold hover:text-primary">
                                 Iniciar sesión
                             </Link> </p>
                     </div>
