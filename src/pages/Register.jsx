@@ -4,9 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import imgOut from '../assets/userLogOut.png';
 import { useUserContext } from '../context/UserContext';
 
-
-
-
 const Register = () => {
     const { userRegister, loading } = useUserContext();
     const [form] = Form.useForm();
@@ -29,7 +26,7 @@ const Register = () => {
                     <img src={imgOut} alt="user Logo" />
                 </div>
 
-                <p className="text-center text-3xl text-gray-300 mb-4">Registro</p>
+                <p className="text-center text-3xl text-black font-bold mb-4">Registro</p>
                 <Form.Item
                     name="nombre"
                     rules={[{ required: true, message: "Por favor introduce tu nombre!" }]}

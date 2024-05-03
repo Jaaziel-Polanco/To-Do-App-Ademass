@@ -1,64 +1,28 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link, useNavigate, } from 'react-router-dom';
-import { Button, Form, Grid, Input, theme } from "antd";
+import { Button, Form, Input, } from "antd";
 import userImg from '../assets/user.png'
 import { useUserContext } from '../context/UserContext';
 
 
-const { useToken } = theme;
-const { useBreakpoint } = Grid;
 
 const Login = () => {
-    const { userAccess, user, loading } = useUserContext();
+    const { userAccess, loading } = useUserContext();
     const navigate = useNavigate();
-    const { token } = useToken();
-    const screens = useBreakpoint();
 
     const handleSubmit = (values) => {
         userAccess(values, navigate);
     };
 
-    useEffect(() => {
-        if (user) {
-            console.log("Redireccionando al dashboard porque user está autenticado");
-            navigate('/dashboard', { replace: true });  // Utiliza 'replace' para evitar que el usuario vuelva a login con el botón atrás
-        }
-    }, [user, navigate]);
-
-    const styles = {
-        container: {
-            backgroundColor: "transparent",
-            borderRadius: "7%",
-            margin: "0 auto",
-            padding: screens.md ? `${token.paddingXL}px` : `${token.sizeXXL}px ${token.padding}px`,
-            width: "380px",
-            boxShadow: "0px 20px 30px 20px rgba(0,0,0,0.1)"
-        },
-        header: {
-            marginBottom: token.marginXL,
-            textAlign: "center"
-        },
-        section: {
-            alignItems: "center",
-            background: "linear-gradient(to right,  #4CAF50, #FF5722)",
-            display: "flex",
-            height: screens.sm ? "100vh" : "100vh",
-            padding: screens.md ? `${token.sizeXXL}px 0px` : "0px"
-        },
-        title: {
-            fontSize: screens.md ? token.fontSizeHeading2 : token.fontSizeHeading3
-        }
-    };
-
     return (
-        <section style={styles.section}>
-            <div style={styles.container} className='animate-fade-down animate-once animate-ease-in'>
-                <div style={styles.header}>
-                    <div className='flex justify-center mb-2'>
+        <section className="flex items-center bg-gradient h-screen p-0 md:p-8">
+            <div className="bg-transparent rounded-3xl m-auto p-8 w-96 shadow-custom animate-fade-down">
+                <div className="text-center mb-8">
+                    <div className="flex justify-center mb-2">
                         <img src={userImg} alt="user Logo" />
                     </div>
-                    <h1 className="text-primary-100 font-semibold text-3xl mb-5 uppercase">Iniciar Sesión </h1>
-                    <p className="text-white font-semibold ">
+                    <h1 className="text-primary-100 font-semibold text-3xl mb-5 uppercase">Iniciar Sesión</h1>
+                    <p className="text-white font-semibold">
                         Bienvenido!! Favor de ingresar tus datos para poder
                         iniciar sesión.
                     </p>
@@ -70,8 +34,8 @@ const Login = () => {
                     }}
                     onFinish={handleSubmit}
                     layout="vertical"
-                    requiredMark="optional">
-
+                    requiredMark="optional"
+                >
                     <Form.Item
                         name="email"
                         rules={[
@@ -111,23 +75,20 @@ const Login = () => {
                         </Link>
                     </Form.Item>
 
-                    <Form.Item style={{ marginBottom: "0px" }}>
+                    <Form.Item className="mb-0">
                         <Button block="true" type='text' htmlType='submit' loading={loading} className="btn text-primary-100 font-extrabold w-full rounded-xl py-1">
                             Acceder
                         </Button>
-                        <div>
-                            <div className="text-white text-center w-full mt-5">
-                                Aún no tienes tu cuenta?{" "}
-                                <p className="animate-bounce animate-infinite animate-ease-in-out">
-                                    <Link to={"/register"} className="text-accent-100 font-extrabold hover:text-primary">
-                                        Registrate
-                                    </Link></p>
-                            </div>
-
+                        <div className="text-white text-center w-full mt-5">
+                            Aún no tienes tu cuenta?{" "}
+                            <p className="animate-bounce">
+                                <Link to={"/register"} className="text-accent-100 font-extrabold hover:text-primary">
+                                    Registrate
+                                </Link>
+                            </p>
                         </div>
                     </Form.Item>
                 </Form>
-
             </div>
         </section>
     )

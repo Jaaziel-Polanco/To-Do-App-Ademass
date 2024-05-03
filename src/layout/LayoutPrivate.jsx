@@ -11,15 +11,18 @@ const auth = getAuth(appFirebase);
 const LayoutPrivate = () => {
     const { user, setUser } = useUserContext();
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate(); // Hook para manejar la navegación
+    const navigate = useNavigate();
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (usuarioFirebase) => {
             setUser(usuarioFirebase);
             setLoading(false);
             if (usuarioFirebase) {
+                console.log('navegando a dashboard porque hay usuario')
                 navigate('/dashboard'); // Redirige al Dashboard si hay usuario
             }
         });
+        console.log(user)
 
         return () => unsubscribe();
     }, [navigate]);
@@ -29,6 +32,7 @@ const LayoutPrivate = () => {
     }
 
     if (!user) {
+        console.log('navegando a login porque no hay usuario')
         return <Navigate to="/login" replace={true} />;
     }
 

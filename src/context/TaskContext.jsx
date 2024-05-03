@@ -23,10 +23,15 @@ export function TaskProvider({ children }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Si no hay usuario, restablece los estados relevantes y termina la ejecución del efecto.
     if (!user) {
-      setLoading(true);
+      setTasks([]);
+      setError(null);
+      setLoading(false);
       return;
     }
+
+    setLoading(true); // Asegúrate de activar el indicador de carga cuando comienza la suscripción.
 
     // Se suscribe a cambios en la colección de tareas del usuario actual
     const unsubscribe = onSnapshot(
@@ -40,6 +45,7 @@ export function TaskProvider({ children }) {
         setLoading(false);
       },
       (err) => {
+        console.log('error', err)
         notification.error({
           message: 'Error al obtener las tareas',
         });
@@ -49,7 +55,9 @@ export function TaskProvider({ children }) {
     );
 
     // Limpiar la suscripción cuando el componente se desmonte o el usuario cambie
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, [user]);
 
   // Función para añadir una nueva tarea

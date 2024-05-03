@@ -38,23 +38,27 @@ const TaskBoard = () => {
     };
 
     const filteredTasks = useMemo(() => {
+        let sortedTasks = [...tasks].sort((a, b) => {
+            const dateA = a.date.split('-').reverse().join('-');
+            const dateB = b.date.split('-').reverse().join('-');
+            return new Date(dateB).getTime() - new Date(dateA).getTime();
+        });
         switch (filter) {
             case 'completed':
-                return tasks.filter(task => task.completed);
+                return sortedTasks.filter(task => task.completed);
             case 'pending':
-                return tasks.filter(task => !task.completed);
+                return sortedTasks.filter(task => !task.completed);
             case 'all':
             default:
-                return tasks;
+                return sortedTasks;
         }
-    }, [tasks, filter]);
+
+    }, [tasks, filter])
 
     // Función para manejar el cambio en el Select
     const handleFilterChange = (value) => {
         setFilter(value);
     };
-
-    console.log(loading)
 
 
     return (
@@ -80,7 +84,7 @@ const TaskBoard = () => {
                 </div>
             </div>
 
-            <div className='px-1 lg:px-7'>
+            <div className='px-1 lg:px-7 pb-20'>
                 <button
                     onClick={() => setIsModalOpen(true)}
                     className="flex items-center gap-2 w-full py-3 px-3 font-semibold rounded-lg border-2 border-dashed ">

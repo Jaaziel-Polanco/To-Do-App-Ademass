@@ -12,12 +12,10 @@ const AddTaskModal = ({ isOpen, onClose, addTask }) => {
     }, [isOpen, form]);
 
     const handleSubmit = async (values) => {
-        // Se asume que toda nueva tarea no está completada inicialmente.
         const formattedValues = {
             ...values,
             date: values.date.format('DD/MM/YYYY'),
             description: values.description || '',
-            completed: false,
         };
 
         try {

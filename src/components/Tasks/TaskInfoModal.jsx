@@ -2,7 +2,6 @@ import React from 'react';
 import { Modal, Button } from 'antd';
 
 const TaskInfoModal = ({ isOpen, onClose, task }) => {
-    // Resto de tu lógica y formateo...
 
     return (
         <Modal

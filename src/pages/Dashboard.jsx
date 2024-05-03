@@ -18,7 +18,7 @@ const Dashboard = () => {
 
 
     return (
-        <div>
+        <>
             <div className='bg-[#8e8a8a]'>
                 <button onClick={showDrawer} className='absolute right-0 mt-5 mr-5 lg:mr-14 flex justify-center items-center z-50 text-[10px] lg:text-lg uppercase '>
                     <span className="icon-[ph--user-circle-thin] w-8 h-8 lg:w-16 lg:h-16"></span>
@@ -35,8 +35,7 @@ const Dashboard = () => {
             </div>
 
             <TaskBoard />
-
-        </div>
+        </>
     )
 }
 
