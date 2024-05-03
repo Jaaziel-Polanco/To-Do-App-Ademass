@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.select.ant-select:not(.ant-select-disabled):hover .ant-select-selector,
+.select.ant-select-focused .ant-select-selector,
+.select.ant-select-open .ant-select-selector {
+    border-color: black !important; /* Color personalizado para hover y focus */
+}
+.select .ant-select-selection-placeholder {
+    color: #333333 !important; /* Cambia 'black' por cualquier color que necesites */
+}
+
+.btn {
+    background-color: #4caf50 !important; 
+}
+.btn:hover {
+    background-color: #ff5722 !important;
+    transition: all 0.3s;
+}
+
+.ant-input:focus, .ant-input:hover, .ant-input-textarea:focus,.ant-picker-input:focus,.ant-picker-focused,.ant-picker:hover,.ant-input-password:hover,.ant-input-password:focus-within, .ant-input-textarea:hover {
+    border-color: #4caf50 !important; 
+}
+
+.ant-picker-input:focus,
+.ant-picker-cell-inner:hover, .ant-picker-cell-inner:focus {
+    background-color: #4CAF50 !important; 
+}
+
+
+.ant-btn-primary {
+    background-color: #4CAF50 !important;
+    border-color: #4CAF50 !important;
+}
+
+.ant-btn-default:hover {
+    color: #4CAF50 !important;
+    border-color: #4CAF50 !important;
+}
+
+.ant-btn-primary:hover, .ant-btn:hover.ant-btn-primary {
+    background-color: #369636 !important;
+    border-color: #369636 !important;
+}
+
+.ant-btn-primary:focus, .ant-btn:focus.ant-btn-primary {
+    background-color: #369636 !important;
+    border-color: #369636 !important;
+}
+
+.ant-btn-primary:active, .ant-btn:active.ant-btn-primary {
+    background-color: #2e7d32 !important;
+    border-color: #2e7d32 !important;
+}
+
+.ant-picker-now-btn:hover {
+    color: #4CAF50 !important;
+}
+
+.site-description-item-profile-wrapper {
+    margin-bottom: 7px;
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    line-height: 1.5715;
+  }
+  
+  .ant-drawer-body p.site-description-item-profile-p {
+    display: block;
+    margin-bottom: 16px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 16px;
+    line-height: 1.5715;
+  }
+  
+  .site-description-item-profile-p-label {
+    display: inline-block;
+    margin-right: 8px;
+    color: rgba(0, 0, 0, 0.85);
+  }
