@@ -86,7 +86,7 @@ const TaskBoard = () => {
                 </div>
             </div>
 
-            <div className='px-1 lg:px-7 pb-20'>
+            <div className='px-1 lg:px-7 pb-20 '>
                 <button
                     onClick={() => setIsModalOpen(true)}
                     className="flex items-center gap-2 w-full py-3 px-3 font-semibold rounded-lg border-2 border-dashed ">

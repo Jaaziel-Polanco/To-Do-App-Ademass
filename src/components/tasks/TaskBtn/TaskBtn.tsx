@@ -41,7 +41,7 @@ const TaskBtn = ({ completed, date, onDelete, onEdit, onShowInfo, onToggleComple
 
 
     return (
-        <div className='flex justify-between items-center lg:gap-2 w-full py-2 lg:py-[8px] pr-1 pl-3 lg:pl-7 lg:pr-6 rounded-lg border-2 border-black shadow-xl mt-3 animate-fade-right'>
+        <div className={`flex justify-between items-center lg:gap-2 w-full py-2 lg:py-[8px] pr-1 pl-3 lg:pl-7 lg:pr-6 rounded-lg border-2 border-black shadow-xl mt-3 ${!showMobileMenu && 'animate-fade-right'}`}>
             <div className='flex-grow cursor-pointer text-xs lg:text-base font-semibold text-textPrimary' onClick={onShowInfo}>
                 {title}
             </div>
